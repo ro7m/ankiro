@@ -101,8 +101,4 @@ window.addEventListener('appinstalled', (evt) => {
     installBtn.style.display = 'none';
 });
 
-// Check if the app is already installed
-if (window.matchMedia('(display-mode: standalone)').matches) {
-    console.log('App is already installed');
-    installBtn.style.display = 'none';
-}
+

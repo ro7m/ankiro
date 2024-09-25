@@ -3,36 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BitsBytes</title>
+    <title>Text Extraction PWA</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="manifest" href="manifest.json">
+    <script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
 </head>
 <body>
-    <h1>Text Extraction from Image</h1>
-    <video id="video" autoplay></video>
-    <button id="capture">Capture Photo</button>
-    <canvas id="canvas" style="display:none;"></canvas>
-    <div id="ocr-result"></div>
-    <button id="sendText">Send Extracted Text to API</button>
-    <button id="installButton" style="display: none;">Install App</button>
-    
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.4/dist/tesseract.min.js"></script>
+    <div id="app">
+        <h1>Text Extraction PWA</h1>
+        <video id="video" autoplay playsinline></video>
+        <canvas id="canvas" style="display:none;"></canvas>
+        <div class="button-container">
+            <button id="capture-btn">Capture Image</button>
+            <button id="extract-btn" disabled>Extract Text</button>
+            <button id="submit-btn" disabled>Submit Text</button>
+        </div>
+        <div id="result">
+            <h2>Extracted Text:</h2>
+            <p id="extracted-text"></p>
+        </div>
+        <div id="api-response"></div>
+    </div>
     <script src="js/ocr.js"></script>
     <script src="js/app.js"></script>
-<script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/ankiro/service-worker.js')
-          .then((registration) => {
-            console.log('Service Worker registered with scope:', registration.scope);
-          }).catch((error) => {
-            console.log('Service Worker registration failed:', error);
-          });
-      });
-    }
-  </script>
-</body>
-</html>
-
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js');
+        }
+    </script>
 </body>
 </html>

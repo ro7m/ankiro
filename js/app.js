@@ -4,6 +4,34 @@ const captureButton = document.getElementById('capture');
 const ocrResult = document.getElementById('ocr-result');
 const sendButton = document.getElementById('sendText');
 
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Prevent the default install prompt
+  e.preventDefault();
+  
+  // Save the event for later use
+  deferredPrompt = e;
+
+  // Optionally, show your own install button to trigger the prompt
+  const installButton = document.querySelector('#installButton');
+  installButton.style.display = 'block';
+
+  installButton.addEventListener('click', () => {
+    // Show the install prompt when the button is clicked
+    deferredPrompt.prompt();
+
+    // Wait for the user's choice
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the install prompt');
+      } else {
+        console.log('User dismissed the install prompt');
+      }
+      deferredPrompt = null; // Reset the prompt
+    });
+  });
+});
 // Get camera stream
 navigator.mediaDevices.getUserMedia({ video: true })
     .then((stream) => {

@@ -1,7 +1,7 @@
 {
   "name": "Imagebrush",
   "short_name": "Imagebrush",
-  "start_url": "/index.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "description": "extracts text from image",

@@ -1,4 +1,6 @@
-async function extractTextFromImage(image) {
-    const result = await Tesseract.recognize(image, 'eng');
-    return result.data.text;  // Extracted text
-}
+const performOCR = async (imageData) => {
+    const result = await Tesseract.recognize(imageData, 'eng', {
+        logger: m => console.log(m)
+    });
+    return result.data.text;
+};

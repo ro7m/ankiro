@@ -47,12 +47,12 @@ submitBtn.addEventListener('click', async () => {
     apiResponse.textContent = 'Submitting...';
 
     try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
-            method: 'POST',
+        const response = await fetch('https://kvdb.io/NyKpFtJ7v392NS8ibLiofx/1', {
+            method: 'PUT',
             body: JSON.stringify({
                 title: 'Extracted Text',
-                body: text,
-                userId: 1,
+                data: text,
+                userId: "imageBrush",
             }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
@@ -60,7 +60,7 @@ submitBtn.addEventListener('click', async () => {
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('Failed to push this data to server');
         }
 
         const data = await response.json();

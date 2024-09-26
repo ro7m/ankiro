@@ -62,9 +62,6 @@ submitBtn.addEventListener('click', async () => {
         if (!response.ok) {
             throw new Error('Failed to push this data to server');
         }
-
-        const data = await response.json();
-        apiResponse.textContent = `API Response: ${JSON.stringify(data, null, 2)}`;
     } catch (error) {
         console.error('Error submitting to API:', error);
         apiResponse.textContent = 'Error occurred while submitting to API.';

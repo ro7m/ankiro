@@ -14,9 +14,14 @@
         <button id="install-btn" style="display: none;">Install App</button>
         <video id="video" autoplay playsinline></video>
         <canvas id="canvas" style="display:none;"></canvas>
-        <div class="button-container">
-            <button id="capture-extract-btn">Capture & Extract Text</button>
-            <button id="submit-btn" disabled>Submit Text</button>
+        <div class="controls">
+            <button id="capture-extract-btn">
+                <span class="button-icon"></span>
+                Extract Text
+            </button>
+           <button id="submit-btn" title="Send to API">
+                <span class="material-icons">send</span>
+            </button>
         </div>
         <div id="result">
             <h2>Extracted Text:</h2>

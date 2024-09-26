@@ -59,11 +59,11 @@ submitBtn.addEventListener('click', async () => {
             },
         });
 
-        if (!response.ok) {
+        if (!response.status === 200) {
             throw new Error('Failed to push this data to server');
-        } else {
-            apiResponse.textContent = 'Submitted the extract with ID : ' + msgKey;
-        }
+        } 
+        
+        apiResponse.textContent = 'Submitted the extract with ID : ' + msgKey; 
         
     } catch (error) {
         console.error('Error submitting to server:', error);

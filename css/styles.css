@@ -9,7 +9,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #1f1e21;
 }
 
 #video {
@@ -18,72 +17,6 @@ body {
     height: auto;
     margin-bottom: 20px;
 }
-
-        .controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-            background-color: #1a1a1a;
-            position: relative;
-            height: 100px;
-        }
-
-        #capture-extract-btn {
-            background-color: transparent;
-            border: none;
-            color: #fff;
-            font-size: 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        #capture-extract-btn:focus {
-            outline: none;
-        }
-
-        #capture-extract-btn .button-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            border: 3px solid #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #capture-extract-btn .button-icon::before {
-            content: '';
-            width: 62px;
-            height: 62px;
-            background-color: #fff;
-            border-radius: 50%;
-        }
-
-        #submit-btn {
-            position: absolute;
-            right: 1rem;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            font-size: 24px;
-            cursor: pointer;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        #submit-btn:hover {
-            background-color: #45a049;
-            transform: scale(1.05);
-        }
 
 .button-container {
     display: flex;

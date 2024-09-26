@@ -47,7 +47,7 @@ submitBtn.addEventListener('click', async () => {
     apiResponse.textContent = 'Submitting...';
 
     try {
-        const response = await fetch('https://kvdb.io/NyKpFtJ7v392NS8ibLiofx/1', {
+        const response = await fetch('https://kvdb.io/NyKpFtJ7v392NS8ibLiofx/'+new Date().getTime(), {
             method: 'PUT',
             body: JSON.stringify({
                 title: 'Extracted Text',

@@ -6,14 +6,14 @@ const VOCAB =
 // Function to load and predict with the TensorFlow model
 async function loadModel() {
   // Load the model (path can be a URL or local path for Node.js)
-  const model = await Tensorflow.loadGraphModel('models/crnn_mobilenet_v2/model.json'); 
+  const model = await tf.loadGraphModel('models/crnn_mobilenet_v2/model.json'); 
 
   return model;
 }
 
 async function preprocessImage(imageData) {
-  let image = Tensorflow.browser.fromPixels(imageData);
-  const resizedImage = Tensorflow.image.resizeBilinear(image, [128, 32]); // Resize to model input size
+  let image = tf.browser.fromPixels(imageData);
+  const resizedImage = tf.image.resizeBilinear(image, [128, 32]); // Resize to model input size
   const normalizedImage = resizedImage.div(255.0); // Normalize
   return normalizedImage.expandDims(0); // Add batch dimension
 }

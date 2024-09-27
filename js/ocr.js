@@ -1,5 +1,6 @@
 // Load TensorFlow.js and the model
-const tf = require('@tensorflow/tfjs');
+import * as tf from '@tensorflow/tfjs';
+
 const VOCAB =
   "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~°£€¥¢฿àâéèêëîïôùûüçÀÂÉÈÊËÎÏÔÙÛÜÇ"
 

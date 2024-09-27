@@ -1,5 +1,7 @@
 // Load TensorFlow.js and the model
 const tf = require('@tensorflow/tfjs');
+const VOCAB =
+  "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~°£€¥¢฿àâéèêëîïôùûüçÀÂÉÈÊËÎÏÔÙÛÜÇ"
 
 // Function to load and predict with the TensorFlow model
 async function loadModel() {
@@ -17,6 +19,26 @@ async function preprocessImage(imageData) {
 }
 async function processPredictions(predictions) {
   let decodedText = ''; 
+  let probabilities = softmax(predictions, -1);
+  let bestPath = unstack(argMax(probabilities, -1), 0);
+  let blank = 126;
+  var words = [];
+  for (const sequence of bestPath) {
+    let collapsed = "";
+    let added = false;
+    const values = sequence.dataSync();
+    const arr = Array.from(values);
+    for (const k of arr) {
+      if (k === blank) {
+        added = false;
+      } else if (k !== blank && added === false) {
+        collapsed += VOCAB[k];
+        added = true;
+      }
+    }
+    words.push(collapsed);
+  }
+  return words;
   return decodedText;
 }
 

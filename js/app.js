@@ -5,6 +5,8 @@ const submitBtn = document.getElementById('submit-btn');
 const extractedText = document.getElementById('extracted-text');
 const apiResponse = document.getElementById('api-response');
 
+let ocrResult = null;
+
 // Access the camera
 async function setupCamera() {
     const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
@@ -27,12 +29,13 @@ captureExtractBtn.addEventListener('click', async () => {
         const imageData = canvas.toDataURL('image/jpeg');
 
         // Perform OCR
-        const text = await performOCR(imageData);
-        extractedText.textContent = text;
+        ocrResult = await performOCR(imageData);
+        extractedText.textContent = ocrResult.text;
         submitBtn.disabled = false;
     } catch (error) {
         console.error('Error during capture and OCR:', error);
         extractedText.textContent = 'Error occurred during text extraction.';
+        ocrResult = null;
     } finally {
         captureExtractBtn.disabled = false;
     }
@@ -40,18 +43,18 @@ captureExtractBtn.addEventListener('click', async () => {
 
 // Submit extracted text to API
 submitBtn.addEventListener('click', async () => {
-    const text = extractedText.textContent;
-    if (!text) return;
+    if (!ocrResult) return;
 
     submitBtn.disabled = true;
     apiResponse.textContent = 'Submitting...';
     let msgKey = new Date().getTime();
     try {
-        const response = await fetch('https://kvdb.io/NyKpFtJ7v392NS8ibLiofx/'+msgKey, {
+        const response = await fetch('https://kvdb.io/NyKpFtJ7v392NS8ibLiofx/' + msgKey, {
             method: 'PUT',
             body: JSON.stringify({
-                title: 'Extracted Text',
-                data: text,
+                title: 'Extracted Text with Bounding Boxes',
+                text: ocrResult.text,
+                boundingBoxes: ocrResult.boundingBoxes,
                 userId: "imageBrush",
             }),
             headers: {
@@ -59,11 +62,11 @@ submitBtn.addEventListener('click', async () => {
             },
         });
 
-        if (!response.status === 200) {
+        if (response.status !== 200) {
             throw new Error('Failed to push this data to server');
-        } 
+        }
         
-        apiResponse.textContent = 'Submitted the extract with ID : ' + msgKey; 
+        apiResponse.textContent = 'Submitted the extract with ID: ' + msgKey; 
         
     } catch (error) {
         console.error('Error submitting to server:', error);
@@ -100,5 +103,3 @@ window.addEventListener('appinstalled', (evt) => {
     console.log('App was installed.');
     installBtn.style.display = 'none';
 });
-
-

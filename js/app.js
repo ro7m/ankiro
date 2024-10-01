@@ -52,10 +52,10 @@ submitBtn.addEventListener('click', async () => {
         const response = await fetch('https://kvdb.io/NyKpFtJ7v392NS8ibLiofx/' + msgKey, {
             method: 'PUT',
             body: JSON.stringify({
-                title: 'Extracted Text with Bounding Boxes',
+                extractedAT: msgKey,
                 text: ocrResult.text,
                 boundingBoxes: ocrResult.boundingBoxes,
-                userId: "imageBrush",
+                appVersion: "imageBrush",
             }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
